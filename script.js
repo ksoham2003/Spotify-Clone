@@ -119,7 +119,6 @@ const musicCollection = [
   }
 ];
 
-// FORMAT TIME (e.g., 3:29)
 function formatTime(seconds) {
   if (isNaN(seconds)) return "0:00";
   const mins = Math.floor(seconds / 60);
@@ -127,7 +126,6 @@ function formatTime(seconds) {
   return `${mins}:${secs < 10 ? "0" : ""}${secs}`;
 }
 
-// TOGGLE PLAY/PAUSE
 function togglePlay() {
   const playBtnIcon = document.querySelector(".play-btn i");
   if (!audio.src) return;
@@ -148,9 +146,7 @@ function togglePlay() {
   isPlaying = !isPlaying;
 }
 
-// UPDATE UI ON CARD CLICK
 function updatePlayer(song, shouldPlay = true) {
-  // Update Audio
   if (song.audio) {
     audio.src = song.audio;
     if (shouldPlay) {
@@ -176,7 +172,6 @@ function updatePlayer(song, shouldPlay = true) {
     if (shouldPlay) return;
   }
 
-  // 1. Update Now Playing Sidebar
   const sidebarContent = document.querySelector(".sidebar-content");
   if (sidebarContent) {
     const mainImg = sidebarContent.querySelector(".main-song-card img");
@@ -295,3 +290,19 @@ filterButtons.forEach(btn => {
     }
   });
 });
+
+const menuBtn = document.getElementById("menuBtn");
+const homeLeft = document.querySelector(".home-left");
+const overlay = document.getElementById("overlay");
+
+if (menuBtn && homeLeft && overlay) {
+  menuBtn.addEventListener("click", () => {
+    homeLeft.classList.toggle("active");
+    overlay.classList.toggle("active");
+  });
+
+  overlay.addEventListener("click", () => {
+    homeLeft.classList.remove("active");
+    overlay.classList.remove("active");
+  });
+}

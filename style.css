@@ -14,21 +14,39 @@ html {
 }
 
 .navbar {
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
+  display: flex;
+  justify-content: space-between;
   align-items: center;
-  padding: 10px 20px;
+  padding: 10px 15px;
   height: 64px;
+  background-color: black;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 
+.menu-btn {
+  display: none;
+  cursor: pointer;
+  font-size: 24px;
+  color: #b3b3b3;
+  margin-right: 15px;
+}
 
+.menu-btn:hover {
+  color: white;
+}
 
-/* left */
+.nav-left {
+  display: flex;
+  align-items: center;
+}
+
 .logo {
-  justify-self: start;
+  display: flex;
+  align-items: center;
 }
 
-/* center */
 .nav-center {
   justify-self: center;
   display: flex;
@@ -36,7 +54,6 @@ html {
   gap: 15px;
 }
 
-/* right */
 .nav-right {
   justify-self: end;
   display: flex;
@@ -98,13 +115,11 @@ html {
   border: 1px solid white;
 }
 
-/* icons */
 .search i {
   color: #b3b3b3;
   font-size: 14px;
 }
 
-/* input */
 .search input {
   border: none;
   outline: none;
@@ -118,7 +133,6 @@ html {
   color: #b3b3b3;
 }
 
-/* shortcut box */
 .shortcut {
   border: 1px solid #666;
   color: #b3b3b3;
@@ -128,19 +142,16 @@ html {
   display: none;
 }
 
-/* show Ctrl K on hover */
 .search:hover .shortcut {
   display: block;
 }
 
-/* divider line */
 .divider {
   width: 1px;
   height: 18px;
   background: #555;
 }
 
-/* browse icon */
 .browse-icon {
   cursor: pointer;
 }
@@ -187,25 +198,21 @@ html {
   padding: 0;
 }
 
-/* layout */
 .home {
   display: grid;
   grid-template-columns: 320px 1fr 300px;
-  /* sidebar | main | right */
   height: calc(100vh - 64px - 90px);
-  /* navbar + player */
   gap: 8px;
   padding: 8px;
 }
 
-/* sidebar */
 .home-left {
   background: #121212;
   border-radius: 10px;
   padding: 16px;
 }
 
-/* header */
+
 .header {
   display: flex;
   justify-content: space-between;
@@ -218,7 +225,6 @@ html {
   font-size: 16px;
 }
 
-/* create button */
 .create-btn {
   display: flex;
   align-items: center;
@@ -235,7 +241,6 @@ html {
   background: #2a2a2a;
 }
 
-/* cards */
 .library-card {
   background: #242424;
   border-radius: 10px;
@@ -243,7 +248,6 @@ html {
   margin-bottom: 16px;
 }
 
-/* text */
 .body-top {
   font-weight: 700;
   margin-bottom: 6px;
@@ -255,7 +259,6 @@ html {
   margin-bottom: 14px;
 }
 
-/* white buttons */
 .btn-white {
   background: white;
   color: black;
@@ -270,7 +273,6 @@ html {
   transform: scale(1.05);
 }
 
-/* right area */
 .home-right {
   background: #121212;
   border-radius: 10px;
@@ -278,10 +280,6 @@ html {
   overflow-y: auto;
 }
 
-
-/* home right */
-
-/* FILTER BUTTONS */
 .filters {
   display: flex;
   gap: 10px;
@@ -303,7 +301,6 @@ html {
   color: black;
 }
 
-/* SECTION */
 .section {
   margin-bottom: 40px;
 }
@@ -324,48 +321,32 @@ html {
   cursor: pointer;
 }
 
-/* CARD ROW */
 .card-row {
   display: flex;
   gap: 20px;
   overflow-x: auto;
-  /* Enable horizontal scrolling */
   scroll-behavior: smooth;
   padding-bottom: 10px;
-  /* Space for hidden scrollbar */
 }
 
-/* Hide scrollbar for Chrome, Safari and Opera */
-.card-row::-webkit-scrollbar {
-  display: none;
-}
-
-/* Hide scrollbar for IE, Edge and Firefox */
 .card-row {
   -ms-overflow-style: none;
-  /* IE and Edge */
   scrollbar-width: none;
-  /* Firefox */
 }
 
-/* MUSIC CARD */
 .music-card {
   width: 180px;
   padding: 16px;
-  /* Increased padding */
   border-radius: 10px;
   background: #181818;
-  /* Default background */
   transition: background 0.3s ease;
   cursor: pointer;
 }
 
 .music-card:hover {
   background: #282828;
-  /* Darker hover effect */
 }
 
-/* IMAGE CONTAINER */
 .img-container {
   position: relative;
   margin-bottom: 16px;
@@ -374,13 +355,11 @@ html {
 .music-card img {
   width: 100%;
   aspect-ratio: 1/1;
-  /* Square images */
   object-fit: cover;
   border-radius: 8px;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
 }
 
-/* CORNER LOGOS */
 .corner-logo {
   position: absolute;
   color: white;
@@ -396,7 +375,6 @@ html {
   left: 8px;
 }
 
-/* PLAY BUTTON ON CARD */
 .card-play-btn {
   position: absolute;
   right: 12px;
@@ -441,11 +419,9 @@ html {
   display: -webkit-box;
   -webkit-line-clamp: 2;
   line-clamp: 2;
-  /* Added for standardization */
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
-
 
 .now-playing {
   background: #000;
@@ -697,7 +673,6 @@ html {
   padding: 0 20px;
 }
 
-/* LEFT */
 .player-left {
   display: flex;
   align-items: center;
@@ -744,7 +719,6 @@ html {
   color: #b3b3b3;
 }
 
-
 .play-btn {
   width: 40px;
   height: 40px;
@@ -785,4 +759,149 @@ input[type="range"] {
   width: 100%;
   height: 4px;
   accent-color: white;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 1001;
+  display: none;
+}
+
+.overlay.active {
+  display: block;
+}
+
+@media (max-width: 1050px) {
+  .home {
+    grid-template-columns: 320px 1fr;
+  }
+
+  .now-playing {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .home {
+    grid-template-columns: 1fr;
+    padding: 0;
+    height: calc(100vh - 64px - 70px);
+  }
+
+  .home-left {
+    position: fixed;
+    top: 0;
+    left: -320px;
+    width: 280px;
+    height: 100%;
+    z-index: 1002;
+    transition: left 0.3s ease;
+    border-radius: 0;
+    box-shadow: 10px 0 20px rgba(0, 0, 0, 0.5);
+  }
+
+  .home-left.active {
+    left: 0;
+  }
+
+  .menu-btn {
+    display: block;
+  }
+
+  .nav-center {
+    display: none;
+  }
+
+  .nav-right .export,
+  .nav-right .install-app,
+  .nav-right .divider,
+  .nav-right .bell,
+  .nav-right .friend-activity {
+    display: none;
+  }
+
+  .player {
+    height: 70px;
+    padding: 0 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .player-left {
+    width: 50%;
+    gap: 8px;
+  }
+
+  .player-left img {
+    width: 45px;
+  }
+
+  .player-center {
+    width: 50%;
+  }
+
+  .player-right {
+    display: none;
+  }
+
+  .controls {
+    gap: 15px;
+    margin-bottom: 0;
+  }
+
+  .controls .fa-shuffle,
+  .controls .fa-repeat {
+    display: none;
+  }
+
+  .progress {
+    position: absolute;
+    top: -2px;
+    left: 0;
+    width: 100%;
+    gap: 0;
+    z-index: 5;
+  }
+
+  .progress span {
+    display: none;
+  }
+
+  .progress input {
+    height: 2px;
+    padding: 0;
+    margin: 0;
+    border-radius: 0;
+  }
+
+  .song-name {
+    font-size: 12px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 120px;
+  }
+
+  .artist {
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .player-left {
+    width: 60%;
+  }
+
+  .player-center {
+    width: 40%;
+  }
+
+  .song-name {
+    max-width: 80px;
+  }
 }
