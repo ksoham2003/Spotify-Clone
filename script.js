@@ -1,3 +1,6 @@
+const audio = new Audio();
+let isPlaying = false;
+
 const musicCollection = [
   {
     id: 1,
@@ -6,7 +9,7 @@ const musicCollection = [
     album: "The World from the Side of the Moon",
     duration: "3:29",
     image: "https://picsum.photos/300?1",
-    audio: "songs/song1.mp3",
+    audio: "songs/Phillip_Phillips_-_Gone_Gone_Gone_(mp3.pm).mp3",
     category: "music"
   },
 
@@ -28,7 +31,7 @@ const musicCollection = [
     album: "Brahmastra",
     duration: "4:28",
     image: "https://picsum.photos/300?3",
-    audio: "songs/song3.mp3",
+    audio: "songs/Kesariya Brahmastra 320 Kbps.mp3",
     category: "music"
   },
 
@@ -39,7 +42,7 @@ const musicCollection = [
     album: "Aashiqui 2",
     duration: "4:10",
     image: "https://picsum.photos/300?4",
-    audio: "songs/song4.mp3",
+    audio: "songs/Tum Hi Ho Aashiqui 2 320 Kbps.mp3",
     category: "music"
   },
 
@@ -116,7 +119,64 @@ const musicCollection = [
   }
 ];
 
-function updatePlayer(song) {
+// FORMAT TIME (e.g., 3:29)
+function formatTime(seconds) {
+  if (isNaN(seconds)) return "0:00";
+  const mins = Math.floor(seconds / 60);
+  const secs = Math.floor(seconds % 60);
+  return `${mins}:${secs < 10 ? "0" : ""}${secs}`;
+}
+
+// TOGGLE PLAY/PAUSE
+function togglePlay() {
+  const playBtnIcon = document.querySelector(".play-btn i");
+  if (!audio.src) return;
+
+  if (isPlaying) {
+    audio.pause();
+    if (playBtnIcon) {
+      playBtnIcon.classList.remove("fa-pause");
+      playBtnIcon.classList.add("fa-play");
+    }
+  } else {
+    audio.play().catch(err => console.error("Error playing audio:", err));
+    if (playBtnIcon) {
+      playBtnIcon.classList.remove("fa-play");
+      playBtnIcon.classList.add("fa-pause");
+    }
+  }
+  isPlaying = !isPlaying;
+}
+
+// UPDATE UI ON CARD CLICK
+function updatePlayer(song, shouldPlay = true) {
+  // Update Audio
+  if (song.audio) {
+    audio.src = song.audio;
+    if (shouldPlay) {
+      audio.play().catch(err => {
+        console.error("Playback failed:", err);
+      });
+      isPlaying = true;
+      const playBtnIcon = document.querySelector(".play-btn i");
+      if (playBtnIcon) {
+        playBtnIcon.classList.remove("fa-play");
+        playBtnIcon.classList.add("fa-pause");
+      }
+    } else {
+      isPlaying = false;
+      const playBtnIcon = document.querySelector(".play-btn i");
+      if (playBtnIcon) {
+        playBtnIcon.classList.remove("fa-pause");
+        playBtnIcon.classList.add("fa-play");
+      }
+    }
+  } else {
+    console.warn("No audio source for this track");
+    if (shouldPlay) return;
+  }
+
+  // 1. Update Now Playing Sidebar
   const sidebarContent = document.querySelector(".sidebar-content");
   if (sidebarContent) {
     const mainImg = sidebarContent.querySelector(".main-song-card img");
@@ -145,6 +205,38 @@ function updatePlayer(song) {
 
   const sidebarHeader = document.querySelector(".sidebar-header h3");
   if (sidebarHeader) sidebarHeader.innerText = song.album || song.title;
+}
+
+const progressBar = document.getElementById("progress-bar");
+const currentTimeDisplay = document.getElementById("current-time");
+const totalDurationDisplay = document.getElementById("total-duration");
+
+audio.addEventListener("loadedmetadata", () => {
+  if (progressBar) progressBar.max = audio.duration;
+  if (totalDurationDisplay) totalDurationDisplay.innerText = formatTime(audio.duration);
+});
+
+audio.addEventListener("timeupdate", () => {
+  if (progressBar) progressBar.value = audio.currentTime;
+  if (currentTimeDisplay) currentTimeDisplay.innerText = formatTime(audio.currentTime);
+});
+
+if (progressBar) {
+  progressBar.addEventListener("input", (e) => {
+    audio.currentTime = e.target.value;
+  });
+}
+
+const volumeSlider = document.querySelector(".volume");
+if (volumeSlider) {
+  volumeSlider.addEventListener("input", (e) => {
+    audio.volume = e.target.value / 100;
+  });
+}
+
+const mainPlayBtn = document.querySelector(".play-btn");
+if (mainPlayBtn) {
+  mainPlayBtn.addEventListener("click", togglePlay);
 }
 
 function renderMusic(data, containerId = "musicContainer") {
@@ -180,6 +272,10 @@ function renderMusic(data, containerId = "musicContainer") {
 
 renderMusic(musicCollection.filter(i => i.category === "music"), "musicContainer");
 renderMusic(musicCollection.filter(i => i.category === "radio"), "radioContainer");
+
+if (musicCollection.length > 0) {
+  updatePlayer(musicCollection[0], false);
+}
 
 const filterButtons = document.querySelectorAll(".filter");
 filterButtons.forEach(btn => {

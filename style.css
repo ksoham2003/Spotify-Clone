@@ -484,7 +484,6 @@ html {
   padding: 0 16px 16px;
 }
 
-/* Global Scrollbar styling */
 ::-webkit-scrollbar {
   width: 12px;
 }
@@ -502,7 +501,6 @@ html {
   background: transparent;
 }
 
-/* MAIN SONG CARD */
 .main-song-card {
   position: relative;
   border-radius: 10px;
@@ -524,7 +522,6 @@ html {
   background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
 }
 
-/* SONG DETAILS */
 .song-details {
   display: flex;
   justify-content: space-between;
@@ -549,7 +546,6 @@ html {
   cursor: pointer;
 }
 
-/* SECTION CARDS */
 .artist-section-card,
 .credits-card,
 .queue-card {
@@ -559,7 +555,6 @@ html {
   overflow: hidden;
 }
 
-/* ARTIST SECTION */
 .artist-header-img {
   position: relative;
 }
@@ -620,7 +615,6 @@ html {
   line-height: 1.5;
 }
 
-/* CREDITS SECTION */
 .credits-card {
   padding: 16px;
 }
@@ -661,7 +655,6 @@ html {
   color: #b3b3b3;
 }
 
-/* QUEUE SECTION */
 .queue-card {
   padding: 16px;
 }
@@ -691,8 +684,6 @@ html {
   color: #b3b3b3;
 }
 
-
-/* PLAYER CONTAINER */
 .player {
   position: fixed;
   bottom: 0;
@@ -735,7 +726,6 @@ html {
   cursor: pointer;
 }
 
-/* CENTER */
 .player-center {
   width: 50%;
   text-align: center;
@@ -768,7 +758,6 @@ html {
   color: black;
 }
 
-/* PROGRESS BAR */
 .progress {
   display: flex;
   align-items: center;
@@ -780,7 +769,6 @@ html {
   flex: 1;
 }
 
-/* RIGHT */
 .player-right {
   display: flex;
   align-items: center;
